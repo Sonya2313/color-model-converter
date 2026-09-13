@@ -1,6 +1,14 @@
 import './App.css';
 import { useState } from 'react';
 
+import {
+  changeColor,
+  changeHsv,
+  changeRgb,
+  changeXyz,
+  type ColorResult,
+} from './viewModel/colorController';
+
 type ColorFieldProps = {
   label: string;
   value: number;
@@ -40,7 +48,7 @@ function ColorField({
         min={min}
         max={max}
         step={step}
-        value={value}
+        value={Number(value.toFixed(1))}
         onChange={(event) => changeValue(event.target.value)}
       />
     </label>
@@ -60,6 +68,47 @@ function App() {
   const [s, setS] = useState(0);
   const [v, setV] = useState(0);
 
+  const [isOutOfGamut, setIsOutOfGamut] = useState(false);
+
+  function updateValues(result: ColorResult) {
+    setRed(result.rgb.r);
+    setGreen(result.rgb.g);
+    setBlue(result.rgb.b);
+
+    setX(result.xyz.x);
+    setY(result.xyz.y);
+    setZ(result.xyz.z);
+
+    setH(result.hsv.h);
+    setS(result.hsv.s);
+    setV(result.hsv.v);
+    setIsOutOfGamut(result.isOutOfGamut);
+  }
+
+  function handleChangeColor(hex: string) {
+    const result = changeColor(hex);
+
+    updateValues(result);
+  }
+
+  function handleChangeRgb(channel: 'r' | 'g' | 'b', value: number) {
+    const result = changeRgb(red, green, blue, channel, value);
+
+    updateValues(result);
+  }
+
+  function handleChangeXyz(channel: 'x' | 'y' | 'z', value: number) {
+    const result = changeXyz(x, y, z, channel, value);
+
+    updateValues(result);
+  }
+
+  function handleChangeHsv(channel: 'h' | 's' | 'v', value: number) {
+    const result = changeHsv(h, s, v, channel, value);
+
+    updateValues(result);
+  }
+
   const selectedColor = `rgb(${red}, ${green}, ${blue})`;
 
   function toHex(value: number) {
@@ -67,16 +116,6 @@ function App() {
   }
 
   const selectedHex = `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
-
-  function changeColor(hex: string) {
-    const newRed = Number.parseInt(hex.slice(1, 3), 16);
-    const newGreen = Number.parseInt(hex.slice(3, 5), 16);
-    const newBlue = Number.parseInt(hex.slice(5, 7), 16);
-
-    setRed(newRed);
-    setGreen(newGreen);
-    setBlue(newBlue);
-  }
 
   return (
     <main className="app">
@@ -101,13 +140,20 @@ function App() {
             <input
               type="color"
               value={selectedHex}
-              onChange={(event) => changeColor(event.target.value)}
+              onChange={(event) => handleChangeColor(event.target.value)}
             />
           </label>
 
           <p className="picker-rgb">
-            RGB: {red}, {green}, {blue}
+            RGB: {red.toFixed(0)}, {green.toFixed(0)}, {blue.toFixed(0)}
           </p>
+
+          {isOutOfGamut && (
+            <p className="gamut-warning">
+              Цвет выходит за пределы sRGB. Для отображения RGB-значения были
+              ограничены до диапазона 0–255.
+            </p>
+          )}
         </aside>
 
         <div className="sections">
@@ -120,7 +166,7 @@ function App() {
               min={0}
               max={255}
               step={1}
-              onChange={setRed}
+              onChange={(value) => handleChangeRgb('r', value)}
             />
 
             <ColorField
@@ -129,7 +175,7 @@ function App() {
               min={0}
               max={255}
               step={1}
-              onChange={setGreen}
+              onChange={(value) => handleChangeRgb('g', value)}
             />
 
             <ColorField
@@ -138,7 +184,7 @@ function App() {
               min={0}
               max={255}
               step={1}
-              onChange={setBlue}
+              onChange={(value) => handleChangeRgb('b', value)}
             />
           </section>
 
@@ -151,7 +197,7 @@ function App() {
               min={0}
               max={100}
               step={0.01}
-              onChange={setX}
+              onChange={(value) => handleChangeXyz('x', value)}
             />
 
             <ColorField
@@ -160,7 +206,7 @@ function App() {
               min={0}
               max={100}
               step={0.01}
-              onChange={setY}
+              onChange={(value) => handleChangeXyz('y', value)}
             />
 
             <ColorField
@@ -169,7 +215,7 @@ function App() {
               min={0}
               max={100}
               step={0.01}
-              onChange={setZ}
+              onChange={(value) => handleChangeXyz('z', value)}
             />
           </section>
 
@@ -182,7 +228,7 @@ function App() {
               min={0}
               max={360}
               step={1}
-              onChange={setH}
+              onChange={(value) => handleChangeHsv('h', value)}
             />
 
             <ColorField
@@ -191,7 +237,7 @@ function App() {
               min={0}
               max={100}
               step={1}
-              onChange={setS}
+              onChange={(value) => handleChangeHsv('s', value)}
             />
 
             <ColorField
@@ -200,7 +246,7 @@ function App() {
               min={0}
               max={100}
               step={1}
-              onChange={setV}
+              onChange={(value) => handleChangeHsv('v', value)}
             />
           </section>
         </div>

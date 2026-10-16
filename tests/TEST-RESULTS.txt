@@ -1,0 +1,168 @@
+Node.js v20.20.1; TS transpiled using preinstalled Babel, not tsc.
+UI/build not verified; see docs/TESTING.md.
+
+TAP version 13
+# Subtest: engine handles empty input
+ok 1 - engine handles empty input
+  ---
+  duration_ms: 1.180815
+  ...
+# Subtest: engine returns every job once
+ok 2 - engine returns every job once
+  ---
+  duration_ms: 20.261183
+  ...
+# Subtest: workers limited to job count
+ok 3 - workers limited to job count
+  ---
+  duration_ms: 0.770883
+  ...
+# Subtest: worker error rejects run
+ok 4 - worker error rejects run
+  ---
+  duration_ms: 2.016169
+  ...
+# Subtest: cancel resolves and terminates workers
+ok 5 - cancel resolves and terminates workers
+  ---
+  duration_ms: 0.332345
+  ...
+# Subtest: collect keeps relative path
+ok 6 - collect keeps relative path
+  ---
+  duration_ms: 0.191193
+  ...
+# Subtest: collect falls back to filename
+ok 7 - collect falls back to filename
+  ---
+  duration_ms: 0.219073
+  ...
+# Subtest: collect rejects over 100000
+ok 8 - collect rejects over 100000
+  ---
+  duration_ms: 0.280862
+  ...
+# Subtest: rgb-300dpi.jpg
+ok 9 - rgb-300dpi.jpg
+  ---
+  duration_ms: 7.825097
+  ...
+# Subtest: rgb-150x300.png
+ok 10 - rgb-150x300.png
+  ---
+  duration_ms: 0.889306
+  ...
+# Subtest: rgb-96dpi.bmp
+ok 11 - rgb-96dpi.bmp
+  ---
+  duration_ms: 0.873551
+  ...
+# Subtest: rgb.pcx
+ok 12 - rgb.pcx
+  ---
+  duration_ms: 0.76777
+  ...
+# Subtest: rgb-lzw.tif
+ok 13 - rgb-lzw.tif
+  ---
+  duration_ms: 1.13026
+  ...
+# Subtest: palette.gif
+ok 14 - palette.gif
+  ---
+  duration_ms: 4.053511
+  ...
+# Subtest: rgba.png
+ok 15 - rgba.png
+  ---
+  duration_ms: 1.17908
+  ...
+# Subtest: gray.jpg
+ok 16 - gray.jpg
+  ---
+  duration_ms: 2.440703
+  ...
+# Subtest: progressive.jpg
+ok 17 - progressive.jpg
+  ---
+  duration_ms: 1.519313
+  ...
+# Subtest: big-endian.tif
+ok 18 - big-endian.tif
+  ---
+  duration_ms: 1.503669
+  ...
+# Subtest: bigtiff.tif
+ok 19 - bigtiff.tif
+  ---
+  duration_ms: 1.528867
+  ...
+# Subtest: exif-vs-jfif.jpg
+ok 20 - exif-vs-jfif.jpg
+  ---
+  duration_ms: 2.04644
+  ...
+# Subtest: jfif-cm.jpg
+ok 21 - jfif-cm.jpg
+  ---
+  duration_ms: 1.937679
+  ...
+# Subtest: 1-bit PNG
+ok 22 - 1-bit PNG
+  ---
+  duration_ms: 0.874642
+  ...
+# Subtest: JPEG DQT extracted
+ok 23 - JPEG DQT extracted
+  ---
+  duration_ms: 2.077303
+  ...
+# Subtest: progressive JPEG
+ok 24 - progressive JPEG
+  ---
+  duration_ms: 2.020229
+  ...
+# Subtest: TIFF LZW
+ok 25 - TIFF LZW
+  ---
+  duration_ms: 0.647256
+  ...
+# Subtest: Exif conflict is explicit
+ok 26 - Exif conflict is explicit
+  ---
+  duration_ms: 3.802771
+  ...
+# Subtest: extension not required
+ok 27 - extension not required
+  ---
+  duration_ms: 0.691707
+  ...
+# Subtest: PNG reads chunks after IDAT
+ok 28 - PNG reads chunks after IDAT
+  ---
+  duration_ms: 1.808255
+  ...
+# Subtest: unknown and truncated inputs
+ok 29 - unknown and truncated inputs
+  ---
+  duration_ms: 1.027661
+  ...
+# Subtest: pixels are not read in large JPEG
+ok 30 - pixels are not read in large JPEG
+  ---
+  duration_ms: 2.900885
+  ...
+# Subtest: TIFF forged offset rejected
+ok 31 - TIFF forged offset rejected
+  ---
+  duration_ms: 0.447607
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 161.078707
